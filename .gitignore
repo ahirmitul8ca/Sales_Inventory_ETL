@@ -13,3 +13,5 @@ data/
 # IDE files
 .vscode/
 .idea/
+
+.venv/
