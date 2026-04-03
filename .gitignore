@@ -1,0 +1,15 @@
+.env
+# Environments
+.env
+venv/
+env/
+__pycache__/
+
+# Project Folders (The ones you created in Python)
+logs/
+exports/
+data/
+
+# IDE files
+.vscode/
+.idea/

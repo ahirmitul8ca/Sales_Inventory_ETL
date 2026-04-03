@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  etl_app:
+    build: .
+    container_name: pandas_etl_prod
+    env_file:
+      - .env
+    environment:
+      # This special address allows the Linux container to talk to your Windows SQL Server
+      - DB_SERVER=host.docker.internal
+      - AUTH_MODE=${AUTH_MODE}
+    networks:
+      - etl_network
+    # Extra permission needed for Azure Identity to work inside a container
+    cap_add:
+      - SYS_ADMIN 
+    volumes:
+      - ./logs:/app/logs
+      - ./exports:/app/exports
+
+networks:
+  etl_network:
+    driver: bridge
