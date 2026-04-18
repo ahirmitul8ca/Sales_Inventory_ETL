@@ -33,7 +33,7 @@ def main():
             
         elif task == "inventory":
             logger.info("Starting Inventory Pipeline...")
-            etl_inventory.run_inventory_pipeline()
+            etl_inventory.run_inventory_pipeline('2011-08-29')
 
         elif task == "sales2":
             logger.info("Starting sales 2")
@@ -43,7 +43,7 @@ def main():
             # Default: Run the full suite
             logger.info("Starting Full ETL Suite (Sales + Inventory)...")
             etl_sales.run_sales_pipeline()
-            etl_inventory.run_inventory_pipeline()
+            etl_inventory.run_inventory_pipeline('2011-08-29')
 
         logger.info("--- Orchestrator: All tasks completed successfully ---")
         collected = gc.collect()

@@ -45,3 +45,5 @@ def run_sales_pipeline():
     except Exception as e:
         logger.error(f"Sales pipline failed : {e}", exc_info=True)
         raise
+
+    
