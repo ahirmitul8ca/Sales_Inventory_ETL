@@ -21,9 +21,10 @@ def get_data(engine,date):
     
     return  df
 
-def transform_inventory(df):
+def transform_inventory(df,date):
 
         logger.info(f"transforming data {len(df)} records")
+        df['Inv_date'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         df['Extracted_At'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")   
         logger.info(f"Transforamtion Complete {len(df)}")
 
@@ -46,7 +47,7 @@ def run_inventory_pipeline(date):
     try:
         engine = get_engine()
         raw_data=get_data(engine,date)
-        clean_data=transform_inventory(raw_data)
+        clean_data=transform_inventory(raw_data,date)
         load_to_csv(clean_data)
 
 
@@ -54,3 +55,7 @@ def run_inventory_pipeline(date):
     except Exception as e:
         logger.error(f"Inventory pipeline failed : {e}", exc_info=True)
         raise
+
+
+if __name__ == "__main__":
+     run_inventory_pipeline('2011-08-30')

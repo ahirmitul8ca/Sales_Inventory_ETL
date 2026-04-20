@@ -10,6 +10,8 @@ import os
 logger = logging.getLogger(__name__)
 export_path=file_manager.EXPORTS_DIR
 
+
+
 def extract_sales(engine):
     logger.info("Extracting Monhlty sales data")
     query = "select * from monthly_sales_view"

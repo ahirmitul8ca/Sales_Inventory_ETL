@@ -1,14 +1,19 @@
 import os
 import logging
 import shutil
+from pathlib import Path
 from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
-LOGS_DIR = os.getenv("HOST_LOGS_PATH", "/app/logs")
-EXPORTS_DIR = os.getenv("HOST_EXPORTS_PATH", "/app/exports")
-DATA_DIR = os.getenv("HOST_DATA_PATH", "/app/data")
-Archive_DIR = os.getenv("HOST_ARCHIVE_PATH", "/app/archive")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+LOGS_DIR = Path(os.getenv("HOST_LOGS_PATH", BASE_DIR / "logs"))
+EXPORTS_DIR = Path(os.getenv("HOST_EXPORTS_PATH", BASE_DIR / "exports"))
+DATA_DIR = Path(os.getenv("HOST_DATA_PATH", BASE_DIR / "data"))
+Archive_DIR = Path(os.getenv("HOST_ARCHIVE_PATH", BASE_DIR / "archive"))
 
 
 def ensure_directories(dir_list=None):
@@ -61,8 +66,9 @@ def archive_old_file(filename, folder):
 
 
 def get_latest_export(prefix,folder):
-    # Find all files in exports starting with the prefix
-    files = list(folder.glob(f"{prefix}*.csv"))
+    folder_path = Path(folder)
+
+    files = list(folder_path.glob(f"{prefix}*.csv"))
     
     if not files:
         logger.warning(f"No files found with prefix: {prefix}")
