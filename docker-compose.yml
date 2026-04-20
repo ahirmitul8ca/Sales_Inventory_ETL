@@ -16,9 +16,10 @@ services:
     cap_add:
       - SYS_ADMIN 
     volumes:
-      - ./logs:/app/logs
-      - ./exports:/app/exports
-
+      - ${HOST_LOGS_PATH}:/app/logs
+      - ${HOST_EXPORTS_PATH}:/app/exports
+      - ${HOST_ARCHIVE_PATH}:/app/archive
+      - ${HOST_DATA_PATH}:/app/data
 networks:
   etl_network:
     driver: bridge

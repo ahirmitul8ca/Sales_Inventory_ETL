@@ -8,7 +8,7 @@ import os
 
 
 logger = logging.getLogger(__name__)
-
+export_path=file_manager.EXPORTS_DIR
 
 def extract_sales(engine):
     logger.info("Extracting Monhlty sales data")
@@ -28,7 +28,7 @@ def transform_sales(df):
 def load_to_csv(df):
 
     file_name=file_manager.get_daily_filename("sales_report","csv")
-    file_path = os.path.join("exports",file_name)
+    file_path = os.path.join(export_path,file_name)
     logger.info(f"file exported to  {file_path} ")
 
     df.to_csv(file_path,index=False)

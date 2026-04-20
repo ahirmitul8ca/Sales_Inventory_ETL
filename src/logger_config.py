@@ -1,16 +1,17 @@
 import logging
 import os
 from datetime import datetime
+from file_manager import LOGS_DIR
 
 def setup_logging():
-    log_dir = "logs"
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
+    
+    if not os.path.exists(LOGS_DIR):
+        os.makedirs(LOGS_DIR)
 
     # Date-only timestamp (e.g., 2026-04-01)
     today = datetime.now().strftime("%Y-%m-%d")
     log_name = f"etl_{today}.log"
-    log_path = os.path.join(log_dir, log_name)
+    log_path = os.path.join(LOGS_DIR, log_name)
 
     logging.basicConfig(
         level=logging.INFO,

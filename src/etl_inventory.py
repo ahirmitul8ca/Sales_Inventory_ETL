@@ -34,7 +34,7 @@ def transform_inventory(df):
 
 def load_to_csv(df):
     file_name=file_manager.get_daily_filename("inventory_report","csv")
-    file_path = os.path.join("exports",file_name)
+    file_path = os.path.join(file_manager.EXPORTS_DIR,file_name)
     logger.info(f"file exported to  {file_path} ")
 
     df.to_csv(file_path,index=False)
